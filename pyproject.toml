@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "devcli"
+version = "0.1.0"
+description = "Rule-based CLI tool for failure analysis and static inspection."
+requires-python = ">=3.11"
+readme = "README.md"
+license = { text = "MIT" }
+
+dependencies = [
+    "typer>=0.7.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0"
+]
+
+[project.scripts]
+devcli = "devcli.cli:app"
+
+[tool.black]
+line-length = 88
