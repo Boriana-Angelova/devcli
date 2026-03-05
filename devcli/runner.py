@@ -80,16 +80,26 @@ class Runner:
             )
 
 
+IGNORE_DIRS = {"venv", ".venv", "__pycache__", ".git", "site-packages"}
+
+
 def _gather_python_files(paths: Iterable[Path]) -> List[Path]:
     files: List[Path] = []
+
     for p in paths:
         if p.is_dir():
             for child in p.rglob("*.py"):
+                # ignore unwanted directories
+                if any(part in IGNORE_DIRS for part in child.parts):
+                    continue
                 files.append(child)
+
         elif p.is_file() and p.suffix == ".py":
             files.append(p)
+
         else:
             logger.debug("Skipping non-python path: %s", p)
+
     return sorted(set(files))
 
 
@@ -112,5 +122,12 @@ def run(paths: Iterable[Path]) -> int:
             logger.error("Failed to parse %s: %s", f, exc)
 
     out = reporter.report(analyses)
+
+   # Save report to Markdown file
+    output_path = Path("analysis_report.md")
+    output_path.write_text(out, encoding="utf-8")
+
     print(out)
+    print(f"\nReport saved to {output_path}")
+
     return 0
