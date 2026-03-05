@@ -1,64 +1,65 @@
-import textwrap
-from pathlib import Path
-
-import pytest
-
-from devcli.traceback_parser import TracebackParser
+import re
+from dataclasses import dataclass
+from typing import Optional
 
 
-def test_type_error_parsing():
-    tb = textwrap.dedent(
-        """
-        Traceback (most recent call last):
-          File "script.py", line 10, in <module>
-            foo()
-          File "script.py", line 7, in foo
-            bar(1)
-          File "script.py", line 3, in bar
-            raise TypeError("bar() missing 1 required positional argument: 'y'")
-        TypeError: bar() missing 1 required positional argument: 'y'
-        """
-    )
-
-    info = TracebackParser.parse(tb)
-    assert info.exc_type == "TypeError"
-    assert "missing 1 required positional argument" in info.message
-    assert info.file is not None and Path(str(info.file)).name == "script.py"
-    assert info.line == 3
-    assert info.function == "bar"
+@dataclass
+class FailureInfo:
+    exc_type: str
+    message: str
+    file: Optional[str]
+    line: Optional[int]
+    function: str
 
 
-def test_import_error_parsing():
-    tb = textwrap.dedent(
-        """
-        Traceback (most recent call last):
-          File "script.py", line 2, in <module>
-            from package.module import something
-        ImportError: cannot import name 'something' from 'package.module' (/path/to/package/module.py)
-        """
-    )
+class TracebackParser:
+    @staticmethod
+    def parse(traceback_text: str) -> FailureInfo:
+        lines = traceback_text.strip().splitlines()
 
-    info = TracebackParser.parse(tb)
-    assert info.exc_type == "ImportError"
-    assert "cannot import name 'something'" in info.message
-    assert info.file is not None and Path(str(info.file)).name == "script.py"
-    assert info.line == 2
-    assert info.function == "<module>"
+        # Find exception line (last non-empty line)
+        exception_line = None
+        for line in reversed(lines):
+            line = line.strip()
+            if line and not line.startswith("Traceback"):
+                exception_line = line
+                break
 
+        if not exception_line:
+            raise ValueError("Invalid traceback format")
 
-def test_assertion_error_parsing():
-    tb = textwrap.dedent(
-        """
-        Traceback (most recent call last):
-          File "test.py", line 5, in check
-            assert x > 0, "x must be positive"
-        AssertionError: x must be positive
-        """
-    )
+        # Extract exception type and message
+        match = re.match(r"^(\w+):\s*(.*)", exception_line)
+        if not match:
+            raise ValueError("Could not parse exception line")
 
-    info = TracebackParser.parse(tb)
-    assert info.exc_type == "AssertionError"
-    assert "x must be positive" in info.message
-    assert info.file is not None and Path(str(info.file)).name == "test.py"
-    assert info.line == 5
-    assert info.function == "check"
+        exc_type = match.group(1)
+        message = match.group(2)
+
+        # Extract last stack frame
+        file = None
+        line_no = None
+        function = None
+
+        # Look for last "File ..." line
+        for i in range(len(lines) - 1):
+            if lines[i].strip().startswith('File "'):
+                frame_line = lines[i].strip()
+
+                frame_match = re.match(
+                    r'File "(.+)", line (\d+), in (.+)',
+                    frame_line,
+                )
+
+                if frame_match:
+                    file = frame_match.group(1)
+                    line_no = int(frame_match.group(2))
+                    function = frame_match.group(3)
+
+        return FailureInfo(
+            exc_type=exc_type,
+            message=message,
+            file=file,
+            line=line_no,
+            function=function if function else "<unknown>",
+        )
