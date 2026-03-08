@@ -3,7 +3,7 @@ Project: devcli – Static Analysis CLI Tool
 A small, production-ready Python CLI for light static analysis of Python files.
 
 1. Project Overview
-devcli is a modular Python-based static analysis CLI tool designed to analyze Python projects, parse execution errors, and generate structured diagnostic reports.
+devcli is a modular Python-based static analysis CLI tool designed to analyze Python projects and generate structured diagnostic reports.
 
 2. System Architecture
 The system follows a clean modular architecture with separation of concerns:
