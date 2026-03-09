@@ -1,0 +1,5 @@
+{
+  "tests/test_traceback_parser.py::test_type_error_parsing": true,
+  "tests/test_traceback_parser.py::test_import_error_parsing": true,
+  "tests/test_traceback_parser.py::test_assertion_error_parsing": true
+}
