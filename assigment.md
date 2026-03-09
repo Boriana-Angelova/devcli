@@ -91,26 +91,36 @@ ________________________________________
 8) Traceback Parser (traceback_parser.py)
 Description:
 Parses Python traceback strings into structured FailureInfo objects.
-Development Process / Процес на разработка:
+Development Process:
 •	Planning: Identify parsing patterns for tracebacks.
 •	Workflow: “Generate parser for Python exception tracebacks into structured objects.”
 •	Testing: Validated with real traceback examples.
 •	Tool Choice: GitHub Copilot.
 
 Challenges & Tool Comparison
+
 Biggest Challenges:
+
 •	Designing an extensible rule engine - The architecture had to support adding new rules without modifying the core analyzer logic. This required careful modularization so that each rule could be implemented as an independent component that processes parsed AST nodes and returns structured results. The final design ensures that additional rules—such as complexity checks, dependency analysis, or style validation—can be integrated with minimal changes to the existing system.
+
 •	Ensuring reliable CLI input/output tests - Testing CLI applications presents unique challenges because input and output occur through the command line rather than traditional function calls. The main difficulty was validating that the CLI correctly processes different user inputs while producing consistent and readable output.
 
 Tool Comparison:
+
 GitHub Copilot was the most helpful tool for generating boilerplate code, scaffolding modules, and creating repetitive structures. It accelerated the development of the CLI layer, data models, and reporting templates by suggesting complete code snippets based on the context. 
+
 Claude Code was particularly useful for complex logical reasoning tasks that required understanding and manipulating program structure. It excelled in generating AST traversal logic and rule-based analysis engines. 
+
 Cursor and Augment were mainly used for code navigation, refactoring, and improving maintainability. Cursor helped quickly locate and edit related code across multiple files, while Augment assisted in restructuring code to be more modular and readable. They were particularly useful when adding new analysis rules or updating the reporting layer without introducing bugs or inconsistencies.
+
 Overall, the combination of these tools allowed a highly efficient development workflow. Copilot handled scaffolding and repetitive tasks, Claude Code supported reasoning-heavy modules like the AST analysis engine, and Cursor/Augment ensured maintainability and seamless navigation across the codebase. Using them together created a balanced approach, where AI accelerated both coding and architectural refinement.
 
 Future Improvements:
+
 •	Create custom prompts for specific analysis rules - A future improvement would be the introduction of configurable AI prompts tailored for specific code analysis tasks. Instead of relying solely on static AST-based rules, the tool could allow developers to define custom prompts that guide an AI model in evaluating particular aspects of the codebase.
+
 •	Integrate AI-powered lint suggestions in real time - Another improvement would be integrating AI-powered linting suggestions directly into the analysis workflow. Instead of only reporting structural metrics, the tool could analyze the code and generate contextual improvement suggestions.
+
 •	Expand testing for corner cases and edge inputs - While the current testing strategy validates the core functionality of the CLI tool, additional tests could improve robustness and reliability. Future work would focus on expanding the test suite to cover a wider range of corner cases and edge inputs.
 
 
