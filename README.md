@@ -27,11 +27,9 @@ Execution Layer (runner.py)
         ↓
 AST-based Static Code Analysis (ast_utils.py / parser.py)
         ↓
-Rule-Based Failure Analyzer (analyzer.py / failure_analyzer.py)
-        ↓
-If runtime error detected:
-        ↓
 Traceback Parser (traceback_parser.py)
+        ↓
+Rule-Based Failure Analyzer (analyzer.py / failure_analyzer.py)
         ↓
 Reporting Layer (reporter.py)
         ↓
