@@ -50,8 +50,13 @@ Install (recommended via virtualenv):
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate   # on Windows: .\.venv\Scripts\activate
+# Linux / Mac:
+source .venv/bin/activate   
+# on Windows: 
+.\.venv\Scripts\activate
+# Then install the dependencies:
 pip install -r requirements.txt
+# Install the project in editable mode:
 pip install -e .
 ```
 
@@ -63,9 +68,12 @@ devcli analyze path/to/module.py
 
 # Analyze multiple files or directories
 devcli analyze src/ tests/other.py
+
+# Analyze git repo
+devcli analyze https://github.com/path
 ```
 
 Project layout
 
 
-- `devcli/` - package containing core modules: `runner.py`, `parser.py`, `analyzer.py`, `reporter.py`, `ast_utils.py`, `models.py`, `cli.py`
+- `devcli/` - package containing core modules: `runner.py`, `parser.py`, `analyzer.py`, `reporter.py`, `ast_utils.py`, `models.py`, `cli.py`, `failure_analyzer.py`, `traceback_parser.py`
