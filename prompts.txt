@@ -1,0 +1,143 @@
+Create a clean Python CLI project called devcli.
+
+Architecture:
+- cli.py
+- runner.py
+- parser.py
+- analyzer.py
+- reporter.py
+- ast_utils.py
+- models.py
+
+Requirements:
+- Use typer for CLI
+- Use dataclasses for models
+- Clean separation of concerns
+- Python 3.11+
+- Type hints everywhere
+- Production-ready structure
+- Include pyproject.toml
+- Include requirements.txt
+- Include basic example usage
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Create a Runner class in Python.
+
+Responsibilities:
+- Execute shell commands using subprocess
+- Capture stdout, stderr, exit code
+- Support timeout parameter
+- Return a structured dataclass RunResult:
+    - command: str
+    - stdout: str
+    - stderr: str
+    - exit_code: int
+    - execution_time: float
+
+Add proper exception handling.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Create a TracebackParser class.
+
+It should:
+- Parse Python traceback text
+- Extract:
+    - exception type
+    - error message
+    - file path
+    - line number
+    - function name
+- Return structured dataclass FailureInfo
+
+Handle multiple stack frames.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Create a RuleBasedFailureAnalyzer class.
+
+It should:
+- Accept FailureInfo object
+- Contain rule-based logic for:
+    - TypeError missing argument
+    - ImportError
+    - ModuleNotFoundError
+    - AssertionError
+    - AttributeError
+- Each rule should:
+    - Detect pattern
+    - Return root cause explanation
+    - Return suggested fix hint
+    - Return confidence score (0-1)
+
+Design it extensible (strategy pattern or registry of rules).
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Create utility functions using Python ast module.
+
+Functions:
+- extract_function_definitions(file_path)
+- extract_function_calls(file_path)
+- count_function_parameters(function_name)
+- detect_argument_mismatch(function_name, call_node)
+
+Use proper AST traversal.
+Return structured results.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Create a MarkdownReporter class.
+
+It should:
+- Accept RunResult and AnalysisResult
+- Generate structured Markdown report
+- Include:
+    - Command executed
+    - Exception details
+    - Root cause
+    - Suggested fix
+    - Confidence score
+- Save report to file: failure_report.md
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Generate a clean Python project structure for:
+
+devcli/
+    cli.py
+    runner.py
+    parser.py
+    analyzer.py
+    reporter.py
+    ast_utils.py
+    models.py
+    __init__.py
+
+Include:
+- pyproject.toml
+- requirements.txt
+- example usage
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Write pytest unit tests for TracebackParser.
+
+Include:
+- TypeError example
+- ImportError example
+- AssertionError example
+
+Use realistic traceback samples.
+
+
+@app.command()
+def analyze(paths: List[str] = typer.Argument(...)):
+
+@app.command()
+def analyze(paths: List[str] = typer.Argument(..., help="Paths or GitHub repos")) -> None:
+    """Analyze local paths or GitHub repositories."""
+
+    resolved_paths = []
+
+    for p in paths:
+        if p.startswith("http://") or p.startswith("https://"):
+            typer.echo(f"Cloning repository: {p}")
+            repo_path = clone_repo(p)
+            resolved_paths.append(repo_path)
+        else:
+            resolved_paths.append(Path(p))
+
+    run(resolved_paths)
