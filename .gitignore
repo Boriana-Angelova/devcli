@@ -1,0 +1,22 @@
+# Created by pytest automatically.
+*
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+
+# Packaging
+*.egg-info/
+
+# Pytest
+.pytest_cache/
+
+# Build
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
