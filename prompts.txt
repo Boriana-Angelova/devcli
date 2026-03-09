@@ -4,10 +4,12 @@ Architecture:
 - cli.py
 - runner.py
 - parser.py
-- analyzer.py
+- analyzer.py / failure_analyzer.py
 - reporter.py
 - ast_utils.py
 - models.py
+- traceback_parser.py
+
 
 Requirements:
 - Use typer for CLI
@@ -99,14 +101,16 @@ It should:
 Generate a clean Python project structure for:
 
 devcli/
-    cli.py
-    runner.py
-    parser.py
-    analyzer.py
-    reporter.py
-    ast_utils.py
-    models.py
-    __init__.py
+- cli.py
+- runner.py
+- parser.py
+- analyzer.py
+- reporter.py
+- ast_utils.py
+- models.py
+- failure_analyzer.py
+- traceback_parser.py
+ __init__.py
 
 Include:
 - pyproject.toml
@@ -122,22 +126,3 @@ Include:
 
 Use realistic traceback samples.
 
-
-@app.command()
-def analyze(paths: List[str] = typer.Argument(...)):
-
-@app.command()
-def analyze(paths: List[str] = typer.Argument(..., help="Paths or GitHub repos")) -> None:
-    """Analyze local paths or GitHub repositories."""
-
-    resolved_paths = []
-
-    for p in paths:
-        if p.startswith("http://") or p.startswith("https://"):
-            typer.echo(f"Cloning repository: {p}")
-            repo_path = clone_repo(p)
-            resolved_paths.append(repo_path)
-        else:
-            resolved_paths.append(Path(p))
-
-    run(resolved_paths)

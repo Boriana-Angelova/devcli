@@ -67,5 +67,5 @@ devcli analyze src/ tests/other.py
 
 Project layout
 
-- `cli.py` - top-level Typer entrypoint
-- `devcli/` - package containing core modules: `runner.py`, `parser.py`, `analyzer.py`, `reporter.py`, `ast_utils.py`, `models.py`
+
+- `devcli/` - package containing core modules: `runner.py`, `parser.py`, `analyzer.py`, `reporter.py`, `ast_utils.py`, `models.py`, `cli.py`

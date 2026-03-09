@@ -130,4 +130,4 @@ def run(paths: Iterable[Path]) -> int:
     print(out)
     print(f"\nReport saved to {output_path}")
 
-    return 0
+    return 0  
