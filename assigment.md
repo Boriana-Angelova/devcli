@@ -30,80 +30,70 @@ The modular design ensures that new features, such as additional analysis rules,
 
 Development Process per Module:
 
-1) CLI Layer (cli.py)
-Description :
-Handles the command-line interface, argument parsing, and task execution.
-Approach & AI assistance:
-•	Defined commands (analyze, runfiles).
-•	AI assisted in generating Typer CLI boilerplate and argument handling.
-Development Process :
-•	Planning: Determine commands and parameters.
-•	Workflow: Scaffold CLI using AI prompts.
-•	Testing: Run sample commands (devcli --help, devcli analyze).
-•	Tool Choice: GitHub Copilot.
-________________________________________
-2) Execution Layer (runner.py)
-Description :
-Orchestrates file handling, recursive Python file discovery, and analysis execution.
+1️⃣ CLI Layer (cli.py)
+
+Description: Handles the command-line interface, argument parsing, and task execution.
+Approach & AI assistance: Defined commands (analyze, runfiles). AI assisted in generating Typer CLI boilerplate and argument handling.
 Development Process:
-•	Planning: Define function to start analysis.
-•	Workflow: “Generate Python function to recursively find Python files from a path list.”
-•	Testing: Unit tests on sample Python files.
-•	Tool Choice: GitHub Copilot.
-________________________________________
-3) Static Analysis Engine (parser.py)
-Description:
-Performs AST-based static analysis on Python files, extracting functions, classes, imports, and TODO comments.
-Development Process / Процес на разработка:
-•	Planning: Decide metrics to extract per file.
-•	Workflow: “Generate a Python function to parse a file and extract AST info.”
-•	Testing: Unit tests on sample .py files.
-•	Tool Choice: GitHub Copilot.
-________________________________________
-4) Rule-Based Failure Analyzer (failure_analyzer.py / analyzer.py)
-Description :
-Analyzes FailureInfo objects using heuristic rules to detect root causes and suggest fixes.
+Planning: Determine commands and parameters.
+Workflow: Scaffold CLI using AI prompts.
+Testing: Run sample commands (devcli --help, devcli analyze).
+Tool Choice: GitHub Copilot.
+
+2️⃣ Execution Layer (runner.py)
+
+Description: Orchestrates file handling, recursive Python file discovery, and analysis execution.
 Development Process:
-•	Planning: Define rules for exception types.
-•	Workflow: “Generate Python class to analyze failure info and suggest fixes.”
-•	Testing: Validated with real tracebacks.
-•	Tool Choice: GitHub Copilot.
-________________________________________
-5) Reporting Layer (reporter.py)
-Description:
-Generates Markdown reports (analysis_report.md or failure_report.md) with structured summaries.
-Development Process :
-•	Planning: Define report structure and metrics.
-•	Workflow: “Generate function to produce Markdown with headers and tables.”
-•	Testing: Visual inspection and CI validation.
-•	Tool Choice: GitHub Copilot.
-________________________________________
-6) AST Utilities (ast_utils.py)
-Description:
-Helper functions to traverse Python AST and extract functions, classes, imports, and TODOs.
+Planning: Define function to start analysis.
+Workflow: “Generate Python function to recursively find Python files from a path list.”
+Testing: Unit tests on sample Python files.
+Tool Choice: GitHub Copilot.
+
+3️⃣ Traceback Parser (traceback_parser.py)
+
+Description: Parses Python traceback strings into structured FailureInfo objects.
 Development Process:
-•	Planning: Create reusable utilities for AST analysis.
-•	Workflow: “Write AST walker functions to collect functions, classes, and comments.”
-•	Testing: Verified extraction from multiple Python files.
-•	Tool Choice: GitHub Copilot.
-________________________________________
-7) Models & Data Structures (models.py)
-Description:
-Defines data classes for FileAnalysis, FailureInfo, and structured analysis results.
+Planning: Identify parsing patterns for tracebacks.
+Workflow: “Generate parser for Python exception tracebacks into structured objects.”
+Testing: Validated with real traceback examples.
+Tool Choice: GitHub Copilot.
+
+4️⃣ AST Utilities / Static Analysis Engine (ast_utils.py / parser.py)
+
+Description: Performs AST-based static analysis on Python files, extracting functions, classes, imports, and TODO comments. Provides helper functions to traverse Python AST.
 Development Process:
-•	Planning: Identify required fields: file_path, functions, classes, todos, error info.
-•	Workflow: “Write data classes with fields: file_path, error_message, line_num, function_name.”
-•	Testing: Verified serialization, deserialization, and integration.
-•	Tool Choice: GitHub Copilot.
-________________________________________
-8) Traceback Parser (traceback_parser.py)
-Description:
-Parses Python traceback strings into structured FailureInfo objects.
+Planning: Decide metrics to extract per file.
+Workflow: “Write AST walker functions to collect functions, classes, and comments.”
+Testing: Verified extraction from multiple Python files.
+Tool Choice: GitHub Copilot.
+
+5️⃣ Rule-Based Failure Analyzer (failure_analyzer.py / analyzer.py)
+
+Description: Analyzes FailureInfo objects using heuristic rules to detect root causes and suggest fixes.
 Development Process:
-•	Planning: Identify parsing patterns for tracebacks.
-•	Workflow: “Generate parser for Python exception tracebacks into structured objects.”
-•	Testing: Validated with real traceback examples.
-•	Tool Choice: GitHub Copilot.
+Planning: Define rules for exception types.
+Workflow: “Generate Python class to analyze failure info and suggest fixes.”
+Testing: Validated with real tracebacks.
+Tool Choice: GitHub Copilot.
+
+6️⃣ Models & Data Structures (models.py)
+
+Description: Defines data classes for FileAnalysis, FailureInfo, and structured analysis results.
+Development Process:
+
+Planning: Identify required fields: file_path, functions, classes, todos, error info.
+Workflow: “Write data classes with fields: file_path, error_message, line_num, function_name.”
+Testing: Verified serialization, deserialization, and integration.
+Tool Choice: GitHub Copilot.
+
+7️⃣ Reporting Layer (reporter.py)
+
+Description: Generates Markdown reports (analysis_report.md or failure_report.md) with structured summaries.
+Development Process:
+Planning: Define report structure and metrics.
+Workflow: “Generate function to produce Markdown with headers and tables.”
+Testing: Visual inspection and CI validation.
+Tool Choice: GitHub Copilot.
 
 Challenges & Tool Comparison
 

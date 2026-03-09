@@ -10,27 +10,32 @@ The system follows a clean modular architecture with separation of concerns:
 • CLI Layer (cli.py)
 • Execution Layer (runner.py)
 • Parsing Layer (traceback_parser.py)
-• Rule-Based Analysis Engine (analyzer.py)
-• Static Analysis Layer (ast_utils.py)
+• Rule-Based Analysis Engine (analyzer.py, failure_analyzer.py)
+• Static Analysis Layer (ast_utils.py, parser.py)
 • Reporting Layer (reporter.py)
 • Data Models (models.py)
+
 
 3. System Execution Flow
 The following diagram describes the execution pipeline:
 
 User Command (CLI)
         ↓
-CLI Layer (Typer)
+CLI Layer (cli.py / Typer)
         ↓
-Execution Layer (Run Command)
+Execution Layer (runner.py)
         ↓
-If Error → Traceback Parser
+AST-based Static Code Analysis (ast_utils.py / parser.py)
         ↓
-Rule-Based Analysis Engine
+Rule-Based Failure Analyzer (analyzer.py / failure_analyzer.py)
         ↓
-Report Generator (Markdown)
+If runtime error detected:
         ↓
-Output to failure_report.md
+Traceback Parser (traceback_parser.py)
+        ↓
+Reporting Layer (reporter.py)
+        ↓
+Output: analysis_report.md / failure_report.md
 
 4. Development Approach
 The project was developed using an AI-assisted workflow including architecture design, code generation support, refactoring, testing, and debugging.
