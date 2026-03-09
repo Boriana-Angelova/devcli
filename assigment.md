@@ -1,5 +1,6 @@
 DevCLI a Python command-line tool for static code analysis. It scans Python files and directories, applies rule-based analysis using the AST module, and generates structured Markdown reports. The project was developed with the assistance of AI-powered development tools, which supported different stages of the implementation process, including architecture design, code generation, and iterative refinement of analysis features. AI tools were used to accelerate development, generate initial code structures, and explore alternative approaches for parsing, rule evaluation, and CLI interaction. This AI-assisted workflow allowed for faster prototyping and helped improve the modular design of the system while maintaining flexibility for future extensions.
 The project is suitable for Python developers, QA engineers, and DevOps teams who want to automate static code analysis, improve code quality, and integrate automated checks into development workflows and CI/CD pipelines.
+
 Functional Requirements
 
 - CLI must accept multiple file paths and directories. 
@@ -15,13 +16,20 @@ Non-Functional Requirements
 - Usability: Clear CLI interface with descriptive help messages. 
 - Maintainability: Modular code and standardized data structures. 
 - Compatibility: Works on Python 3.9+ across platforms (Windows, Linux, macOS).
+
 System Architecture
+
 The system is organized into clearly separated technological modules to ensure modularity, maintainability, and scalability. Each module has a well-defined responsibility and interacts with other components through structured interfaces. Artificial intelligence tools were used during development to accelerate implementation, improve code quality, and assist with architectural decisions.
+
 The main modules of the system include the Command-Line Interface (CLI) layer, the execution and orchestration layer, the static analysis engine, the traceback parsing module, the reporting layer, and the data models layer. The CLI layer handles user interaction and command parsing. The execution layer manages workflow coordination and file processing. The analysis engine performs AST-based static code analysis using rule-based logic. The traceback parser extracts structured information from error messages. The reporting layer generates formatted Markdown output. The data models layer defines standardized structures for representing results and ensuring consistency across the system.
+
 For each module, the development approach followed the same structured process. First, the responsibilities of the module were clearly defined. Second, the internal logic and dependencies were designed. Third, AI tools were used to generate scaffolding code, improve structure, and suggest optimizations. Finally, each module was tested independently to ensure correctness before integration.
 Artificial intelligence assisted in multiple ways, including generating boilerplate code, designing AST traversal logic, improving error handling, refining architecture decisions, and creating reusable templates. AI tools were also used to validate design choices, improve documentation quality, and enhance code readability. This AI-assisted workflow significantly accelerated development while maintaining clean architecture principles.
+
 The modular design ensures that new features, such as additional analysis rules, alternative output formats, or integration with external systems, can be added without modifying the core structure of the application.
+
 Development Process per Module:
+
 1) CLI Layer (cli.py)
 Description :
 Handles the command-line interface, argument parsing, and task execution.
