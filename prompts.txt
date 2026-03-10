@@ -3,12 +3,12 @@ Create a clean Python CLI project called devcli.
 Architecture:
 - cli.py
 - runner.py
-- parser.py
+- ast_utils.py / parser.py
 - analyzer.py / failure_analyzer.py
-- reporter.py
-- ast_utils.py
-- models.py
 - traceback_parser.py
+- reporter.py
+- models.py
+
 
 
 Requirements:

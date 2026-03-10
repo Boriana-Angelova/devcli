@@ -9,9 +9,9 @@ devcli is a modular Python-based static analysis CLI tool designed to analyze Py
 The system follows a clean modular architecture with separation of concerns:
 • CLI Layer (cli.py)
 • Execution Layer (runner.py)
-• Parsing Layer (traceback_parser.py)
-• Rule-Based Analysis Engine (analyzer.py, failure_analyzer.py)
 • Static Analysis Layer (ast_utils.py, parser.py)
+• Parsing Layer (traceback_parser.py) 
+• Rule-Based Analysis Engine (analyzer.py, failure_analyzer.py)
 • Reporting Layer (reporter.py)
 • Data Models (models.py)
 

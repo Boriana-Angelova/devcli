@@ -1,7 +1,7 @@
 # Created by pytest automatically.
 *
 # Python cache
-*devcli/__pycache__/
+*__pycache__/
 *.pyc
 *.pytest_cache/
 
