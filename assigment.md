@@ -134,5 +134,5 @@ devcli --help
 Pytest
 ![ Alt text](https://github.com/Boriana-Angelova/devcli/blob/main/screenshots/pytest.png)
 
-devcli run test.py
+devcli analyze test.py
 ![ Alt text](https://github.com/Boriana-Angelova/devcli/blob/main/screenshots/test.py.png)
