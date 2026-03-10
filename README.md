@@ -10,38 +10,19 @@ The system follows a clean modular architecture with separation of concerns:
 • CLI Layer (cli.py)
 • Execution Layer (runner.py)
 • Static Analysis Layer (ast_utils.py, parser.py)
-• Parsing Layer (traceback_parser.py) 
+• Parsing Layer (traceback_parser.py), if runtime error detected
 • Rule-Based Analysis Engine (analyzer.py, failure_analyzer.py)
 • Reporting Layer (reporter.py)
 • Data Models (models.py)
+• Output: analysis_report.md / failure_report.md
 
-
-3. System Execution Flow
-The following diagram describes the execution pipeline:
-
-User Command (CLI)
-        ↓
-CLI Layer (cli.py / Typer)
-        ↓
-Execution Layer (runner.py)
-        ↓
-AST-based Static Code Analysis (ast_utils.py / parser.py)
-        ↓
-(if runtime error detected) → Traceback Parser (traceback_parser.py)
-        ↓
-Rule-Based / Failure Analyzer (analyzer.py / failure_analyzer.py)
-        ↓
-Reporting Layer (reporter.py)
-        ↓
-Output: analysis_report.md / failure_report.md
-
-4. Development Approach
+3. Development Approach
 The project was developed using an AI-assisted workflow including architecture design, code generation support, refactoring, testing, and debugging.
 
-5. Who This Project Is Useful For
+4. Who This Project Is Useful For
 This tool is useful for Python developers, students learning software architecture, teams building internal tools, educators demonstrating modular design, and developers working on CI/CD automation.
 
-6. Conclusion
+5. Conclusion
 The devcli project demonstrates AI-assisted software engineering, modular architecture, rule-based reasoning, structured static analysis, and professional Python packaging practices.
 
 
@@ -77,6 +58,5 @@ devcli analyze https://github.com/path
 ```
 
 Project layout
-
 
 - `devcli/` - package containing core modules: `cli.py`,`runner.py`, `ast_utils.py`, `parser.py`, `traceback_parser.py`, `analyzer.py`,  `failure_analyzer.py`, `reporter.py`, `models.py`
