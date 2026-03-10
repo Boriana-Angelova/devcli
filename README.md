@@ -55,6 +55,9 @@ devcli analyze src/ tests/other.py
 
 # Analyze git repo
 devcli analyze https://github.com/path
+
+# Runfiles a single file
+devcli runfiles my_file.py
 ```
 
 Project layout
