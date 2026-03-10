@@ -7,7 +7,11 @@ from typing import List
 
 import typer
 
-from devcli.runner import Runner, run
+from .runner import Runner, run
+from .traceback_parser import TracebackParser
+from .failure_analyzer import RuleBasedFailureAnalyzer
+from .reporter import MarkdownReporter
+from .models import AnalysisResult
 
 
 app = typer.Typer(help="devcli — lightweight Python static & runtime analysis CLI")
@@ -69,21 +73,43 @@ def runfiles(
         if result.exit_code != 0:
             typer.echo("Failure detected. Analyzing...")
 
+            # -----------------------------
             # Parse traceback
+            # -----------------------------
             parser = TracebackParser()
             failure_info = parser.parse(result.stderr)
 
+            # -----------------------------
             # Analyze root cause
+            # -----------------------------
             analyzer = RuleBasedFailureAnalyzer()
-            analysis = analyzer.analyze(failure_info)
+            rule_results = analyzer.analyze(failure_info)
 
+            # -----------------------------
+            # Combine results
+            # -----------------------------
+            analysis = AnalysisResult(
+                failure=failure_info,
+                rule_results=rule_results
+            )
+
+            # -----------------------------
             # Generate report
+            # -----------------------------
             reporter = MarkdownReporter()
-            reporter.generate(result, analysis)
+            reporter.generate_and_save(result, analysis)
 
-            typer.echo(f"Root cause: {analysis.root_cause}")
-            typer.echo(f"Suggested fix: {analysis.fix_hint}")
-            typer.echo(f"Confidence: {analysis.confidence:.2f}")
+            # -----------------------------
+            # CLI output
+            # -----------------------------
+            if rule_results:
+                primary = rule_results[0]
+
+                typer.echo(f"Root cause: {primary.root_cause}")
+                typer.echo(f"Suggested fix: {primary.suggestion}")
+                typer.echo(f"Confidence: {primary.confidence:.2f}")
+            else:
+                typer.echo("No rule-based diagnosis available.")
 
         else:
             typer.echo(f"{path} ran successfully ✅")

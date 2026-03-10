@@ -45,6 +45,5 @@ class FailureInfo:
 
 @dataclass
 class AnalysisResult:
-    root_cause: str
-    fix_hint: str
-    confidence: float
+    failure: FailureInfo
+    rule_results: List["RuleResult"]  # rule_results може да е list, ще съдържа анализираните правила

@@ -2,42 +2,40 @@
 
 ## Command
 
-`echo hi`
+`model.py`
 
 ## Execution
 
-- Exit code: **0**
-- Execution time: **0.010s**
+- Exit code: **-2**
+- Execution time: **0.001s**
 
 ### Stdout
 
 ```
-hi
-
+<empty>
 ```
-
 ### Stderr
 
 ```
-<empty>
+[WinError 2] The system cannot find the file specified
 ```
 
 ## Exception Details
 
-- Type: **ValueError**
-- Message: bad
-- Location: a.py:5 in `main`
+- Type: **<unknown>**
+- Message: <none>
+- Location: <unknown> in `<unknown>`
 
 ## Root Cause
 
-bad value
+Unable to determine root cause from rules.
 
 ## Suggested Fix
 
-fix value
+Inspect the full traceback and context; consider adding a custom rule for this pattern.
 
-**Confidence:** 0.50
+**Confidence:** 0.10
 
 ## All Rules
 
-- **Generic** (confidence: 0.50) — bad value
+- **Generic** (confidence: 0.10) — Unable to determine root cause from rules.

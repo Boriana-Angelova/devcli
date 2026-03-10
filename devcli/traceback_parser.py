@@ -12,11 +12,7 @@ EXC_RE = re.compile(r'^(?P<type>[A-Za-z_][\w\.]*): (?P<message>.+)$')
 
 
 class TracebackParser:
-    """Parse Python traceback text into a structured `FailureInfo` dataclass.
-
-    This is intentionally conservative: it looks for the last exception line and the
-    last traceback frame preceding it. It tolerates typical CPython traceback formatting.
-    """
+    """Parse Python traceback text into a structured `FailureInfo` dataclass."""
 
     @staticmethod
     def parse(text: str) -> FailureInfo:
@@ -38,10 +34,9 @@ class TracebackParser:
                 exc_index = i
                 break
 
-        # If we didn't find an explicit exception line, try a fallback: last non-empty line
+        # fallback if no explicit exception line
         if exc_index is None and lines:
             last = lines[-1].strip()
-            # attempt to split on ": "
             if ": " in last:
                 t, _, msg = last.partition(": ")
                 exc_type = t
@@ -64,4 +59,10 @@ class TracebackParser:
                     func = m.group("func").strip()
                     break
 
-        return FailureInfo(exc_type=exc_type, message=message, file=file_path, line=line_no, function=func)
+        return FailureInfo(
+            exception_type=exc_type,
+            message=message,
+            file=file_path,
+            line=line_no,
+            function=func
+        )
