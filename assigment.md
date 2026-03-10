@@ -49,16 +49,7 @@ Workflow: “Generate Python function to recursively find Python files from a pa
 Testing: Unit tests on sample Python files.
 Tool Choice: GitHub Copilot.
 
-3️⃣ Traceback Parser (traceback_parser.py)
-
-Description: Parses Python traceback strings into structured FailureInfo objects.
-Development Process:
-Planning: Identify parsing patterns for tracebacks.
-Workflow: “Generate parser for Python exception tracebacks into structured objects.”
-Testing: Validated with real traceback examples.
-Tool Choice: GitHub Copilot.
-
-4️⃣ AST Utilities / Static Analysis Engine (ast_utils.py / parser.py)
+3️⃣ AST Utilities / Static Analysis Engine (ast_utils.py / parser.py)
 
 Description: Performs AST-based static analysis on Python files, extracting functions, classes, imports, and TODO comments. Provides helper functions to traverse Python AST.
 Development Process:
@@ -67,32 +58,43 @@ Workflow: “Write AST walker functions to collect functions, classes, and comme
 Testing: Verified extraction from multiple Python files.
 Tool Choice: GitHub Copilot.
 
+
+4️⃣ Traceback Parser (traceback_parser.py)
+
+Description: Parses Python traceback strings into structured FailureInfo objects.
+Development Process:
+Planning: Identify parsing patterns for tracebacks.
+Workflow: “Generate parser for Python exception tracebacks into structured objects.”
+Testing: Validated with real traceback examples.
+Tool Choice: GitHub Copilot.
+
 5️⃣ Rule-Based Failure Analyzer (failure_analyzer.py / analyzer.py)
 
-Description: Analyzes FailureInfo objects using heuristic rules to detect root causes and suggest fixes.
+Description: Analyzes FailureInfo objects using heuristic rules to detect root causes and suggest fixes or extracts key metrics.
 Development Process:
-Planning: Define rules for exception types.
+Planning: Define rules for exception types or summary.
 Workflow: “Generate Python class to analyze failure info and suggest fixes.”
 Testing: Validated with real tracebacks.
 Tool Choice: GitHub Copilot.
 
-6️⃣ Models & Data Structures (models.py)
+6️⃣ Reporting Layer (reporter.py)
 
-Description: Defines data classes for FileAnalysis, FailureInfo, and structured analysis results.
+Description: Generates Markdown reports (analysis_report.md / failure_report.md) with structured summaries.
+Development Process:
+Planning: Define report structure and metrics.
+Workflow: “Generate function to produce Markdown with headers and tables.”
+Testing: Visual inspection and CI validation.
+Tool Choice: GitHub Copilot.
+
+7️⃣ Models & Data Structures (models.py)
+
+Description: Defines data classes for FileAnalysis, FailureInfo, and structured analysis results. 
+Serves as central data layer, used by CLI, parser, runner, analyzer, and reporter.
 Development Process:
 
 Planning: Identify required fields: file_path, functions, classes, todos, error info.
 Workflow: “Write data classes with fields: file_path, error_message, line_num, function_name.”
 Testing: Verified serialization, deserialization, and integration.
-Tool Choice: GitHub Copilot.
-
-7️⃣ Reporting Layer (reporter.py)
-
-Description: Generates Markdown reports (analysis_report.md or failure_report.md) with structured summaries.
-Development Process:
-Planning: Define report structure and metrics.
-Workflow: “Generate function to produce Markdown with headers and tables.”
-Testing: Visual inspection and CI validation.
 Tool Choice: GitHub Copilot.
 
 Challenges & Tool Comparison

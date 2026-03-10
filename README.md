@@ -27,9 +27,9 @@ Execution Layer (runner.py)
         ↓
 AST-based Static Code Analysis (ast_utils.py / parser.py)
         ↓
-Traceback Parser (traceback_parser.py)
+(if runtime error detected) → Traceback Parser (traceback_parser.py)
         ↓
-Rule-Based Failure Analyzer (analyzer.py / failure_analyzer.py)
+Rule-Based / Failure Analyzer (analyzer.py / failure_analyzer.py)
         ↓
 Reporting Layer (reporter.py)
         ↓
@@ -79,4 +79,4 @@ devcli analyze https://github.com/path
 Project layout
 
 
-- `devcli/` - package containing core modules: `runner.py`, `parser.py`, `analyzer.py`, `reporter.py`, `ast_utils.py`, `models.py`, `cli.py`, `failure_analyzer.py`, `traceback_parser.py`
+- `devcli/` - package containing core modules: `cli.py`,`runner.py`, `ast_utils.py`, `parser.py`, `traceback_parser.py`, `analyzer.py`,  `failure_analyzer.py`, `reporter.py`, `models.py`
