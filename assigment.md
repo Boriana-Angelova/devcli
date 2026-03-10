@@ -123,10 +123,16 @@ Future Improvements:
 
 •	Expand testing for corner cases and edge inputs - While the current testing strategy validates the core functionality of the CLI tool, additional tests could improve robustness and reliability. Future work would focus on expanding the test suite to cover a wider range of corner cases and edge inputs.
 
+Working System Evidence
 
-
- 
+ devcli analyze devcli/ and result saved in md file
 ![ Alt text](https://github.com/Boriana-Angelova/devcli/blob/main/screenshots/analyze.png)
+
+devcli --help
 ![ Alt text](https://github.com/Boriana-Angelova/devcli/blob/main/screenshots/help.png)
+
+Pytest
 ![ Alt text](https://github.com/Boriana-Angelova/devcli/blob/main/screenshots/pytest.png)
+
+devcli run test.py
 ![ Alt text](https://github.com/Boriana-Angelova/devcli/blob/main/screenshots/test.py.png)
