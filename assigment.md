@@ -126,3 +126,7 @@ Future Improvements:
 
 
  
+![ Alt text](https://github.com/Boriana-Angelova/devcli/blob/main/screenshots/analyze.png)
+![ Alt text](https://github.com/Boriana-Angelova/devcli/blob/main/screenshots/help.png)
+![ Alt text](https://github.com/Boriana-Angelova/devcli/blob/main/screenshots/pytest.png)
+![ Alt text](https://github.com/Boriana-Angelova/devcli/blob/main/screenshots/test.py.png)
